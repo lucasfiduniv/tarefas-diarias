@@ -1,0 +1,20 @@
+{
+  "name": "tarefas-diarias",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx src/http/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^22.5.4",
+    "tsx": "^4.19.0"
+  }
+}
