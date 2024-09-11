@@ -15,6 +15,7 @@
   "dependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.5.4",
+    "fastify": "^4.28.1",
     "tsx": "^4.19.0"
   }
 }
