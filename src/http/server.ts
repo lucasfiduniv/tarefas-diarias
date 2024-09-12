@@ -1,5 +1,5 @@
 import fastify from 'fastify'
-import { createGoal } from '../functions/create-goal'
+
 import z from 'zod'
 import {
   serializerCompiler,
@@ -8,46 +8,18 @@ import {
 } from 'fastify-type-provider-zod'
 import { getWeekPendingGoals } from '../functions/get-week-pending-goals'
 import { createGoalCompletion } from '../functions/create-goal-completion'
+import { createGoalRoute } from './routes/create-goal'
+import { getPendingGoals } from './routes/get-pending-goals'
+import { createCompletion } from './routes/create-completion'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.post(
-  '/goal-completions',
-  { schema: { body: z.object({ goalId: z.string() }) } },
-  async request => {
-    const { goalId } = request.body
-    await createGoalCompletion({ goalId })
-  }
-)
-
-app.get('/pending-goals', async () => {
-  const { pendingGoals } = await getWeekPendingGoals()
-  return { pendingGoals }
-})
-
-app.post(
-  '/goals',
-  {
-    schema: {
-      body: z
-        .object({
-          title: z.string(),
-          desiredWeeklyFrequency: z.number().int().min(1).max(7),
-        })
-        .strip(),
-    },
-  },
-  async request => {
-    const { title, desiredWeeklyFrequency } = request.body
-    await createGoal({
-      title,
-      desiredWeeklyFrequency,
-    })
-  }
-)
+app.register(createCompletion)
+app.register(getPendingGoals)
+app.register(createGoalRoute)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP Server running on http://localhost:3333')
