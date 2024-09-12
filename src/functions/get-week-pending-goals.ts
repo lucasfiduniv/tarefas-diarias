@@ -36,6 +36,7 @@ export async function getWeekPendingGoals() {
 
       .groupBy(goalCompletations.goalId)
   )
+
   const pendingGoals = await db
     .with(goalsCreatedUpToWeek, goalCompletationCounts)
     .select({
