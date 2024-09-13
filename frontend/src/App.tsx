@@ -1,7 +1,9 @@
 function App() {
   return (
     <>
-      <h1>hello world</h1>
+      <div>
+        <img src="/logo-empityScreen.svg" alt="" />
+      </div>
     </>
   );
 }
