@@ -8,6 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./components/ui/dialog";
+import { Input } from "./components/ui/input";
+import { Label } from "./components/ui/label";
+import { RadioGroup, RadioGroupItem } from "./components/ui/radio-group";
 
 function App() {
   return (
@@ -41,12 +44,27 @@ function App() {
             </DialogDescription>
           </div>
           <form action="" className="flex-1 flex flex-col justify-between">
-            <div>
-
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+              <Label htmlFor="title">Qual a Atividade?</Label>
+              <Input id="title" autoFocus placeholder="Praticar exercicios, meditar, etc..."/>
+              </div>
+              <div className="flex flex-col gap-2">
+              <Label>Quantas vezes na semana</Label>
+              <RadioGroup>
+                <RadioGroupItem value="1">
+1x na semana
+                </RadioGroupItem>
+              </RadioGroup>
+              </div>
             </div>
             <div className="flex items-center gap-3">
-              <Button variant="secondary" className="flex-1">Fechar</Button>
-                <Button className="flex-1">Salvar</Button>
+              <DialogClose asChild>
+                <Button type="button" variant="secondary" className="flex-1">
+                  Fechar
+                </Button>
+              </DialogClose>
+              <Button className="flex-1">Salvar</Button>
             </div>
           </form>
         </div>
