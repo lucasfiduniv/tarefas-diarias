@@ -11,7 +11,7 @@ interface SummaryData {
   total: number;
   goalsPerDay: {
     [date: string]: Goal[];
-  };
+  } | null;
 }
 
 interface ApiResponse {
