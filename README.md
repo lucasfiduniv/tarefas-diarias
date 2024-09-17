@@ -57,7 +57,7 @@ Este é um projeto de gerenciamento de tarefas diárias que utiliza **Vite** no 
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/tarefas-diarias.git
+   git clone https://github.com/lucasfiduniv/tarefas-diarias.git
    ```
 
 2. **Navegue até a pasta do backend:**
@@ -218,4 +218,4 @@ Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
 ---
 
-**Observação:** Substitua `https://github.com/seu-usuario/tarefas-diarias.git` pelo URL real do seu repositório GitHub. Certifique-se também de atualizar quaisquer informações adicionais, como autor, descrição detalhada do projeto e instruções específicas que possam ser relevantes para os contribuidores ou usuários do seu projeto.
+**Observação:** Substitua `https://github.com/lucasfiduniv/tarefas-diarias.git` pelo URL real do seu repositório GitHub. Certifique-se também de atualizar quaisquer informações adicionais, como autor, descrição detalhada do projeto e instruções específicas que possam ser relevantes para os contribuidores ou usuários do seu projeto.
