@@ -4,12 +4,11 @@ import { DialogTrigger } from "./ui/dialog";
 import { InOrbitIcon } from "./in-orbit-icon";
 import { Progress, ProgressIndicator } from "./ui/progress-bar";
 import { Separator } from "./ui/separator";
-import { OutlineButton } from "./ui/outline-button";
-import dayjs from "dayjs";
-import ptBR from "dayjs/locale/pt-br";
 import { PendingGoals } from "./pending-goals";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+dayjs.locale("pt-br");
 
-dayjs.locale(ptBR);
 interface Goal {
   goalId: string;
   title: string;
@@ -28,10 +27,17 @@ interface SummaryProps {
 
 export function Summary({ summaryData }: SummaryProps) {
   const { completed, total, goalsPerDay } = summaryData;
-  const progressPercentage = (completed / total) * 100;
+  const progressPercentage = total > 0 ? (completed / total) * 100 : 0;
 
   const firstDayOfTheWeek = dayjs().startOf("week").format("DD/MMM");
   const lastDayOfTheWeek = dayjs().endOf("week").format("DD/MMM");
+
+  const dates =
+    goalsPerDay && Object.keys(goalsPerDay).length > 0
+      ? Object.keys(goalsPerDay).sort(
+          (a, b) => new Date(b).getTime() - new Date(a).getTime()
+        )
+      : [];
 
   return (
     <div className="py-10 max-w-[480px] px-5 mx-auto flex flex-col gap-6">
@@ -54,7 +60,7 @@ export function Summary({ summaryData }: SummaryProps) {
         <Progress value={completed} max={total}>
           <ProgressIndicator style={{ width: `${progressPercentage}%` }} />
         </Progress>
-        <div className="flex items-center justify-between text-xm text-zinc-400">
+        <div className="flex items-center justify-between text-sm text-zinc-400">
           <span>
             Você completou <span className="text-zinc-100">{completed}</span> de{" "}
             <span className="text-zinc-100">{total}</span> metas nessa semana.
@@ -69,35 +75,36 @@ export function Summary({ summaryData }: SummaryProps) {
         <div className="flex flex-col gap-6">
           <h2>Sua Semana</h2>
 
-          {goalsPerDay ? (
-            Object.entries(goalsPerDay).map(([date, goals]) => (
+          {dates.length > 0 ? (
+            dates.map((date) => (
               <div key={date} className="flex flex-col gap-4">
                 <h3 className="font-medium">
-                  {new Date(date).toLocaleDateString("pt-BR", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                  })}
+                  {dayjs(date).format("dddd, D [de] MMMM")}
                 </h3>
                 <ul className="flex flex-col gap-3">
-                  {goals.map((goal) => (
-                    <li key={goal.goalId} className="flex items-center gap-2">
-                      <CheckCircle2 className="size-4 text-pink-500" />
-                      <span className="text-sm text-zinc-400">
-                        Você completou{" "}
-                        <span className="text-zinc-100">{goal.title}</span> às{" "}
-                        <span className="text-zinc-100">
-                          {new Date(goal.completedAt).toLocaleTimeString(
-                            "pt-BR",
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            }
-                          )}
-                        </span>
-                      </span>
-                    </li>
-                  ))}
+                  {goalsPerDay &&
+                    goalsPerDay[date]
+                      .sort(
+                        (a, b) =>
+                          new Date(b.completedAt).getTime() -
+                          new Date(a.completedAt).getTime()
+                      )
+                      .map((goal) => (
+                        <li
+                          key={goal.goalId}
+                          className="flex items-center gap-2"
+                        >
+                          <CheckCircle2 className="size-4 text-pink-500" />
+                          <span className="text-sm text-zinc-400">
+                            Você completou{" "}
+                            <span className="text-zinc-100">{goal.title}</span>{" "}
+                            às{" "}
+                            <span className="text-zinc-100">
+                              {dayjs(goal.completedAt).format("HH:mm")}
+                            </span>
+                          </span>
+                        </li>
+                      ))}
                 </ul>
               </div>
             ))
