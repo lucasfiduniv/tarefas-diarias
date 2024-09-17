@@ -7,7 +7,8 @@ import { getSummury } from "./http/get-summury";
 function App() {
   const { data } = useQuery({
     queryKey: ["summary"],
-    queryFn:getSummury
+    queryFn: getSummury,
+    staleTime: 1000 * 60,
   });
   return (
     <Dialog>
