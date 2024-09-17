@@ -215,7 +215,3 @@ VITE_PUBLIC_URL_BACK="http://localhost:3333"
 ## Licença
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
-
----
-
-**Observação:** Substitua `https://github.com/lucasfiduniv/tarefas-diarias.git` pelo URL real do seu repositório GitHub. Certifique-se também de atualizar quaisquer informações adicionais, como autor, descrição detalhada do projeto e instruções específicas que possam ser relevantes para os contribuidores ou usuários do seu projeto.
