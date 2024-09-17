@@ -1,12 +1,13 @@
 import { CheckCircle2, Plus } from "lucide-react";
 import { Button } from "./ui/button";
-import { DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogTrigger } from "./ui/dialog";
 import { InOrbitIcon } from "./in-orbit-icon";
 import { Progress, ProgressIndicator } from "./ui/progress-bar";
 import { Separator } from "./ui/separator";
 import { PendingGoals } from "./pending-goals";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
+import { CreateGoal } from "./create-goal";
 dayjs.locale("pt-br");
 
 interface Goal {
@@ -48,12 +49,15 @@ export function Summary({ summaryData }: SummaryProps) {
             {firstDayOfTheWeek} - {lastDayOfTheWeek}
           </span>
         </div>
-        <DialogTrigger asChild>
-          <Button size="sm">
-            <Plus className="size-4" />
-            Cadastrar Meta
-          </Button>
-        </DialogTrigger>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button size="sm">
+              <Plus className="size-4" />
+              Cadastrar Meta
+            </Button>
+          </DialogTrigger>
+          <CreateGoal />
+        </Dialog>
       </div>
 
       <div className="flex flex-col gap-3">
