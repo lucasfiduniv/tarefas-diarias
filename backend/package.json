@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "dev": "tsx watch --env-file .env src/http/server.ts",
-    "seed": "tsx --env-file .env src/db/seed.ts"
-  },
+"scripts": {
+  "dev": "tsx watch --env-file .env src/http/server.ts",
+  "seed": "tsx --env-file .env src/db/seed.ts",
+  "build": "tsc && cp .env dist/.env",
+  "start": "node dist/http/server.js"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,6 +24,7 @@
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.5.4",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
     "fastify": "^4.28.1",
     "fastify-type-provider-zod": "^2.0.0",
